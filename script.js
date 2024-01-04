@@ -7,21 +7,19 @@ const loader = document.getElementById('loader');
 
 let apiQuotes = []
 
-// Show Loading
-const loading = () => {
+const showLoadingSpinner = () => {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-// Hide Loading
-const complete = () => {
+const removeLoadingSpinner = () => {
     quoteContainer.hidden = false;
     loader.hidden = true;
 }
 
 // Show New Quote
 const newQuote = () => {
-    loading();
+    showLoadingSpinner();
     // Pick a random quote from apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
 
@@ -38,15 +36,15 @@ const newQuote = () => {
     } else {
         quoteText.classList.remove('long-quote');
     }
-    // Set Quote, Hide Loader
+  
     quoteText.textContent = quote.text;
-    complete();
+    removeLoadingSpinner();
 
 }
 
 // Get Quotes From API
 const getQuotes = async () => {
-    loading();
+    showLoadingSpinner();
     const apiUrl = 'https://jacintodesign.github.io/quotes-api/data/quotes.json'
     // const apiUrl = 'https://zenquotes.io/api/random'
     try {
